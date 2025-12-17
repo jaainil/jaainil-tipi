@@ -1,0 +1,26 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/backend/src/schema/app-info.json",
+    "id": "alist",
+    "available": true,
+    "name": "AList",
+    "short_desc": "File listing and WebDAV-supported storage indexer",
+    "description": "AList is a flexible file listing program that supports multiple storage providers and WebDAV.",
+    "version": "latest",
+    "tipi_version": 4,
+    "author": "Xhofe",
+    "source": "https://github.com/alist-org/alist",
+    "website": "https://alist.nn.ci",
+    "categories": [
+        "data",
+        "utilities"
+    ],
+    "port": 5244,
+    "exposable": true,
+    "https": false,
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "dynamic_config": true,
+    "force_pull": false
+}

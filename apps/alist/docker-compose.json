@@ -1,0 +1,33 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "alist",
+            "image": "xhofe/alist:latest",
+            "environment": {
+                "PUID": "0",
+                "PGID": "0",
+                "UMASK": "022",
+                "TZ": "UTC"
+            },
+            "internalPort": 5244,
+            "addPorts": [
+                {
+                    "containerPort": 5245,
+                    "hostPort": 5245,
+                    "tcp": true,
+                    "udp": false
+                }
+            ],
+            "volumes": [
+                {
+                    "hostPath": "/etc/alist",
+                    "containerPath": "/opt/alist/data",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ]
+        }
+    ]
+}
