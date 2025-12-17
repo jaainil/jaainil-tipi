@@ -1,0 +1,77 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "appwrite",
+            "image": "appwrite/appwrite:1.6.1",
+            "isMain": true,
+            "internalPort": 80,
+            "environment": {
+                "_APP_ENV": "production",
+                "_APP_DB_HOST": "mariadb",
+                "_APP_DB_PORT": 3306,
+                "_APP_DB_SCHEMA": "appwrite",
+                "_APP_DB_USER": "appwrite",
+                "_APP_REDIS_HOST": "redis",
+                "_APP_REDIS_PORT": 6379
+            },
+            "volumes": [
+                {
+                    "hostPath": "uploads",
+                    "containerPath": "/storage/uploads"
+                },
+                {
+                    "hostPath": "cache",
+                    "containerPath": "/storage/cache"
+                },
+                {
+                    "hostPath": "config",
+                    "containerPath": "/storage/config"
+                },
+                {
+                    "hostPath": "certificates",
+                    "containerPath": "/storage/certificates"
+                },
+                {
+                    "hostPath": "functions",
+                    "containerPath": "/storage/functions"
+                },
+                {
+                    "hostPath": "builds",
+                    "containerPath": "/storage/builds"
+                }
+            ],
+            "dependsOn": [
+                "mariadb",
+                "redis"
+            ]
+        },
+        {
+            "name": "mariadb",
+            "image": "mariadb:10.11",
+            "environment": {
+                "MYSQL_DATABASE": "appwrite",
+                "MYSQL_USER": "appwrite",
+                "MYSQL_PASSWORD": "appwrite",
+                "MYSQL_ROOT_PASSWORD": "appwrite_root"
+            },
+            "volumes": [
+                {
+                    "hostPath": "mariadb",
+                    "containerPath": "/var/lib/mysql"
+                }
+            ]
+        },
+        {
+            "name": "redis",
+            "image": "redis:7-alpine",
+            "command": "redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru",
+            "volumes": [
+                {
+                    "hostPath": "redis",
+                    "containerPath": "/data"
+                }
+            ]
+        }
+    ]
+}

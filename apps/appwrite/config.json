@@ -1,0 +1,37 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/cli/src/schemas/app-info.json",
+    "id": "appwrite",
+    "available": true,
+    "name": "Appwrite",
+    "short_desc": "Open-source backend server for web and mobile apps",
+    "description": "Appwrite is a secure backend server that abstracts common development tasks like authentication, databases, storage, and functions.",
+    "author": "Appwrite",
+    "source": "https://github.com/appwrite/appwrite",
+    "website": "https://appwrite.io",
+    "tipi_version": 4,
+    "version": "1.6.1",
+    "port": 80,
+    "categories": [
+        "development",
+        "data"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "exposable": true,
+    "https": true,
+    "dynamic_config": true,
+    "form_fields": [
+        {
+            "type": "password",
+            "label": "Database Root Password",
+            "env_variable": "MYSQL_ROOT_PASSWORD"
+        },
+        {
+            "type": "password",
+            "label": "Database User Password",
+            "env_variable": "MYSQL_PASSWORD"
+        }
+    ]
+}
