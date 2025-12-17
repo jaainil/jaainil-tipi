@@ -1,10 +1,40 @@
 {
+    "schemaVersion": 2,
     "services": [
         {
-            "name": "affine",
-            "image": "ghcr.io/toeverything/affine:${AFFINE_REVISION}",
-            "isMain": true,
+            "name": "affine_server",
+            "image": "ghcr.io/toeverything/affine:${AFFINE_REVISION:-stable}",
+            "environment": [
+                {
+                    "key": "REDIS_SERVER_HOST",
+                    "value": "redis"
+                },
+                {
+                    "key": "DATABASE_URL",
+                    "value": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}"
+                },
+                {
+                    "key": "AFFINE_INDEXER_ENABLED",
+                    "value": "false"
+                }
+            ],
             "internalPort": 3010,
+            "volumes": [
+                {
+                    "hostPath": "${UPLOAD_LOCATION}",
+                    "containerPath": "/root/.affine/storage",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                },
+                {
+                    "hostPath": "${CONFIG_LOCATION}",
+                    "containerPath": "/root/.affine/config",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ],
             "dependsOn": {
                 "redis": {
                     "condition": "service_healthy"
@@ -15,33 +45,45 @@
                 "affine_migration": {
                     "condition": "service_completed_successfully"
                 }
-            },
-            "volumes": [
-                {
-                    "hostPath": "${APP_DATA_DIR}/storage",
-                    "containerPath": "/root/.affine/storage"
-                },
-                {
-                    "hostPath": "${APP_DATA_DIR}/config",
-                    "containerPath": "/root/.affine/config"
-                }
-            ],
-            "environment": {
-                "REDIS_SERVER_HOST": "redis",
-                "DATABASE_URL": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE}",
-                "AFFINE_INDEXER_ENABLED": "false",
-                "AFFINE_SERVER_HTTPS": "${AFFINE_SERVER_HTTPS}",
-                "AFFINE_SERVER_HOST": "${AFFINE_SERVER_HOST}",
-                "AFFINE_SERVER_EXTERNAL_URL": "${AFFINE_SERVER_EXTERNAL_URL}"
             }
         },
         {
-            "name": "affine_migration",
-            "image": "ghcr.io/toeverything/affine:${AFFINE_REVISION}",
+            "name": "affine_migration_job",
+            "image": "ghcr.io/toeverything/affine:${AFFINE_REVISION:-stable}",
             "command": [
                 "sh",
                 "-c",
                 "node ./scripts/self-host-predeploy.js"
+            ],
+            "environment": [
+                {
+                    "key": "REDIS_SERVER_HOST",
+                    "value": "redis"
+                },
+                {
+                    "key": "DATABASE_URL",
+                    "value": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}"
+                },
+                {
+                    "key": "AFFINE_INDEXER_ENABLED",
+                    "value": "false"
+                }
+            ],
+            "volumes": [
+                {
+                    "hostPath": "${UPLOAD_LOCATION}",
+                    "containerPath": "/root/.affine/storage",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                },
+                {
+                    "hostPath": "${CONFIG_LOCATION}",
+                    "containerPath": "/root/.affine/config",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
             ],
             "dependsOn": {
                 "postgres": {
@@ -50,54 +92,54 @@
                 "redis": {
                     "condition": "service_healthy"
                 }
-            },
-            "volumes": [
-                {
-                    "hostPath": "${APP_DATA_DIR}/storage",
-                    "containerPath": "/root/.affine/storage"
-                },
-                {
-                    "hostPath": "${APP_DATA_DIR}/config",
-                    "containerPath": "/root/.affine/config"
-                }
-            ],
-            "environment": {
-                "REDIS_SERVER_HOST": "redis",
-                "DATABASE_URL": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE}",
-                "AFFINE_INDEXER_ENABLED": "false",
-                "AFFINE_SERVER_HTTPS": "${AFFINE_SERVER_HTTPS}",
-                "AFFINE_SERVER_HOST": "${AFFINE_SERVER_HOST}",
-                "AFFINE_SERVER_EXTERNAL_URL": "${AFFINE_SERVER_EXTERNAL_URL}"
             }
         },
         {
-            "name": "redis",
+            "name": "affine_redis",
             "image": "redis",
             "healthCheck": {
-                "test": "redis-cli --raw incr ping",
+                "test": "CMD redis-cli --raw incr ping",
                 "interval": "10s",
                 "timeout": "5s",
                 "retries": 5
             }
         },
         {
-            "name": "postgres",
+            "name": "affine_postgres",
             "image": "pgvector/pgvector:pg16",
-            "volumes": [
+            "environment": [
                 {
-                    "hostPath": "${APP_DATA_DIR}/postgres",
-                    "containerPath": "/var/lib/postgresql/data"
+                    "key": "POSTGRES_USER",
+                    "value": "${DB_USERNAME}"
+                },
+                {
+                    "key": "POSTGRES_PASSWORD",
+                    "value": "${DB_PASSWORD}"
+                },
+                {
+                    "key": "POSTGRES_DB",
+                    "value": "${DB_DATABASE:-affine}"
+                },
+                {
+                    "key": "POSTGRES_INITDB_ARGS",
+                    "value": "--data-checksums"
+                },
+                {
+                    "key": "POSTGRES_HOST_AUTH_METHOD",
+                    "value": "trust"
                 }
             ],
-            "environment": {
-                "POSTGRES_USER": "${DB_USERNAME}",
-                "POSTGRES_PASSWORD": "${DB_PASSWORD}",
-                "POSTGRES_DB": "${DB_DATABASE}",
-                "POSTGRES_INITDB_ARGS": "--data-checksums",
-                "POSTGRES_HOST_AUTH_METHOD": "trust"
-            },
+            "volumes": [
+                {
+                    "hostPath": "${DB_DATA_LOCATION}",
+                    "containerPath": "/var/lib/postgresql/data",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ],
             "healthCheck": {
-                "test": "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}",
+                "test": "CMD pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE:-affine}",
                 "interval": "10s",
                 "timeout": "5s",
                 "retries": 5

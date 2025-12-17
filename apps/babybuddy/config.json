@@ -19,7 +19,7 @@
         "arm64"
     ],
     "exposable": true,
-    "https": false,
+    "https": true,
     "dynamic_config": true,
     "force_pull": false
 }
