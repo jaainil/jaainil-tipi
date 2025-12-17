@@ -1,0 +1,67 @@
+{
+    "$schema": "https://schemas.runtipi.io/app-info.json",
+    "id": "activepieces",
+    "available": true,
+    "name": "Activepieces",
+    "short_desc": "Open-source automation and workflow builder",
+    "description": "Activepieces is a self-hosted, open-source automation platform that lets you build powerful workflows connecting apps, APIs, and services.",
+    "version": "0.73.0",
+    "tipi_version": 4,
+    "author": "Activepieces",
+    "source": "https://github.com/activepieces/activepieces",
+    "website": "https://www.activepieces.com",
+    "categories": [
+        "automation",
+        "development"
+    ],
+    "port": 8080,
+    "exposable": true,
+    "https": false,
+    "dynamic_config": true,
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "form_fields": [
+        {
+            "type": "password",
+            "label": "Postgres Password",
+            "env_variable": "AP_POSTGRES_PASSWORD",
+            "required": true
+        },
+        {
+            "type": "text",
+            "label": "Postgres Username",
+            "env_variable": "AP_POSTGRES_USERNAME",
+            "default": "postgres",
+            "required": true
+        },
+        {
+            "type": "text",
+            "label": "Postgres Database",
+            "env_variable": "AP_POSTGRES_DATABASE",
+            "default": "activepieces",
+            "required": true
+        },
+        {
+            "type": "random",
+            "label": "JWT Secret",
+            "env_variable": "AP_JWT_SECRET",
+            "encoding": "hex",
+            "required": true
+        },
+        {
+            "type": "random",
+            "label": "Encryption Key (32 hex chars)",
+            "env_variable": "AP_ENCRYPTION_KEY",
+            "encoding": "hex",
+            "required": true
+        },
+        {
+            "type": "password",
+            "label": "API Key (optional)",
+            "env_variable": "AP_API_KEY",
+            "required": false
+        }
+    ]
+}
