@@ -1,0 +1,26 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/cli/src/schemas/app-info.json",
+    "id": "anubis",
+    "available": true,
+    "name": "Anubis",
+    "short_desc": "Proof-of-work reverse proxy for bot mitigation",
+    "description": "Anubis is a lightweight proof-of-work reverse proxy designed to protect web services from abusive bots and scrapers.",
+    "author": "Techaro",
+    "source": "https://github.com/techarohq/anubis",
+    "website": "https://github.com/techarohq/anubis",
+    "tipi_version": 4,
+    "version": "latest",
+    "port": 8080,
+    "categories": [
+        "security",
+        "network"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "exposable": true,
+    "https": false,
+    "dynamic_config": true,
+    "force_pull": false
+}

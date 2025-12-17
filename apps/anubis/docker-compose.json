@@ -1,0 +1,49 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "anubis",
+            "image": "ghcr.io/techarohq/anubis:latest",
+            "environment": {
+                "BIND": ":8080",
+                "DIFFICULTY": "4",
+                "METRICS_BIND": ":9090",
+                "SERVE_ROBOTS_TXT": "true",
+                "TARGET": "http://nginx",
+                "POLICY_FNAME": "/data/cfg/botPolicy.yaml",
+                "OG_PASSTHROUGH": "true",
+                "OG_EXPIRY_TIME": "24h"
+            },
+            "internalPort": 8080,
+            "volumes": [
+                {
+                    "hostPath": "./botPolicy.yaml",
+                    "containerPath": "/data/cfg/botPolicy.yaml",
+                    "readOnly": true,
+                    "shared": false,
+                    "private": false
+                }
+            ],
+            "healthCheck": {
+                "test": "CMD anubis --healthcheck",
+                "interval": "5s",
+                "timeout": "30s",
+                "retries": 5,
+                "startPeriod": "500ms"
+            }
+        },
+        {
+            "name": "nginx",
+            "image": "nginx",
+            "volumes": [
+                {
+                    "hostPath": "./www",
+                    "containerPath": "/usr/share/nginx/html",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ]
+        }
+    ]
+}
