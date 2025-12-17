@@ -1,0 +1,49 @@
+{
+    "id": "ackee",
+    "name": "Ackee",
+    "version": "3.5.0",
+    "schemaVersion": 4,
+    "description": "Self-hosted, privacy-friendly analytics tool",
+    "categories": [
+        "analytics"
+    ],
+    "author": "electerious",
+    "website": "https://ackee.electerious.com",
+    "source": "https://github.com/electerious/Ackee",
+    "license": "MIT",
+    "repository": {
+        "type": "docker",
+        "url": "https://hub.docker.com/r/electerious/ackee"
+    },
+    "ports": [
+        {
+            "containerPort": 3000,
+            "protocol": "tcp"
+        }
+    ],
+    "architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "env": [
+        {
+            "name": "ACKEE_USERNAME",
+            "label": "Admin Username",
+            "type": "string",
+            "required": true
+        },
+        {
+            "name": "ACKEE_PASSWORD",
+            "label": "Admin Password",
+            "type": "password",
+            "required": true
+        },
+        {
+            "name": "ACKEE_PORT",
+            "label": "Ackee Port",
+            "type": "number",
+            "default": 3000,
+            "required": true
+        }
+    ]
+}
