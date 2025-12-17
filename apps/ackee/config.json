@@ -3,9 +3,11 @@
     "name": "Ackee",
     "version": "3.5.0",
     "schemaVersion": 4,
-    "description": "Self-hosted, privacy-friendly analytics tool",
+    "available": true,
+    "short_desc": "Self-hosted, privacy-friendly analytics tool",
+    "tipi_version": 2,
     "categories": [
-        "analytics"
+        "data"
     ],
     "author": "electerious",
     "website": "https://ackee.electerious.com",

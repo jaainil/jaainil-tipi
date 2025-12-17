@@ -1,16 +1,11 @@
 {
-    "version": "3.8",
-    "services": {
-        "ackee": {
+    "services": [
+        {
+            "name": "ackee",
             "image": "electerious/ackee:latest",
-            "container_name": "ackee",
             "restart": "unless-stopped",
-            "ports": [
-                {
-                    "host": "${ACKEE_PORT}",
-                    "container": 3000
-                }
-            ],
+            "isMain": true,
+            "internalPort": 3000,
             "environment": {
                 "WAIT_HOSTS": "mongo:27017",
                 "ACKEE_MONGODB": "mongodb://mongo:27017/ackee",
@@ -21,16 +16,16 @@
                 "mongo"
             ]
         },
-        "mongo": {
+        {
+            "name": "mongo",
             "image": "mongo:latest",
-            "container_name": "ackee-mongo",
             "restart": "unless-stopped",
             "volumes": [
                 {
-                    "host": "${APP_DATA_DIR}/mongo",
-                    "container": "/data/db"
+                    "hostPath": "${APP_DATA_DIR}/mongo",
+                    "containerPath": "/data/db"
                 }
             ]
         }
-    }
+    ]
 }
