@@ -1,51 +1,39 @@
 {
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/main/packages/shared/src/schemas/app-info.json",
     "id": "ackee",
-    "name": "Ackee",
-    "version": "3.5.0",
-    "schemaVersion": 4,
     "available": true,
-    "short_desc": "Self-hosted, privacy-friendly analytics tool",
-    "tipi_version": 2,
-    "categories": [
-        "data"
-    ],
-    "author": "electerious",
-    "website": "https://ackee.electerious.com",
+    "name": "Ackee",
+    "short_desc": "Self-hosted analytics tool with full data ownership",
+    "description": "Ackee is a self-hosted analytics platform that focuses on privacy, simplicity, and transparency. It helps you understand how users interact with your website without tracking them across the web.",
+    "author": "Electerious",
     "source": "https://github.com/electerious/Ackee",
-    "license": "MIT",
-    "repository": {
-        "type": "docker",
-        "url": "https://hub.docker.com/r/electerious/ackee"
-    },
-    "ports": [
-        {
-            "containerPort": 3000,
-            "protocol": "tcp"
-        }
+    "website": "https://ackee.electerious.com",
+    "tipi_version": 4,
+    "version": "latest",
+    "port": 3000,
+    "categories": [
+        "data",
+        "development"
     ],
-    "architectures": [
+    "exposable": true,
+    "https": false,
+    "supported_architectures": [
         "amd64",
         "arm64"
     ],
-    "env": [
+    "form_fields": [
         {
-            "name": "ACKEE_USERNAME",
+            "type": "text",
             "label": "Admin Username",
-            "type": "string",
-            "required": true
+            "placeholder": "admin",
+            "required": true,
+            "env_variable": "ACKEE_USERNAME"
         },
         {
-            "name": "ACKEE_PASSWORD",
-            "label": "Admin Password",
             "type": "password",
-            "required": true
-        },
-        {
-            "name": "ACKEE_PORT",
-            "label": "Ackee Port",
-            "type": "number",
-            "default": 3000,
-            "required": true
+            "label": "Admin Password",
+            "required": true,
+            "env_variable": "ACKEE_PASSWORD"
         }
     ]
 }
