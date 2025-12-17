@@ -1,0 +1,10 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "bentopdf",
+            "image": "bentopdf/bentopdf-simple:latest",
+            "internalPort": 8080
+        }
+    ]
+}
