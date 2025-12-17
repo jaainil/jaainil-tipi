@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "babybuddy",
+            "image": "lscr.io/linuxserver/babybuddy",
+            "internalPort": 8000,
+            "volumes": [
+                {
+                    "hostPath": "/path/to/appdata",
+                    "containerPath": "/config",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ]
+        }
+    ]
+}
