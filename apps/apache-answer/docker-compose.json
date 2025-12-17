@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "answer",
+            "image": "apache/answer",
+            "internalPort": 80,
+            "volumes": [
+                {
+                    "hostPath": "answer-data",
+                    "containerPath": "/data",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ]
+        }
+    ]
+}
