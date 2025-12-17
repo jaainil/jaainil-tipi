@@ -1,0 +1,33 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/cli/src/schemas/app-info.json",
+    "id": "browserless",
+    "available": true,
+    "name": "Browserless",
+    "short_desc": "Headless Chromium as a service",
+    "description": "Browserless provides a headless Chromium service for automation, scraping, and testing via a simple HTTP API.",
+    "author": "Browserless",
+    "source": "https://github.com/browserless/browserless",
+    "website": "https://www.browserless.io",
+    "tipi_version": 4,
+    "version": "latest",
+    "port": 3000,
+    "categories": [
+        "development",
+        "automation"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "exposable": true,
+    "https": true,
+    "dynamic_config": true,
+    "form_fields": [
+        {
+            "type": "password",
+            "label": "Browserless Token",
+            "env_variable": "TOKEN",
+            "required": true
+        }
+    ]
+}
