@@ -1,0 +1,59 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/main/packages/shared/src/schemas/app-info.schema.json",
+    "id": "anse",
+    "available": true,
+    "name": "ANSE",
+    "short_desc": "AI-powered search and chat interface using OpenAI-compatible APIs",
+    "description": "ANSE is a lightweight web interface for AI-powered search and chat, supporting OpenAI-compatible APIs with configurable models and endpoints.",
+    "author": "ddiu8081",
+    "source": "https://github.com/ddiu8081/anse",
+    "website": "https://github.com/ddiu8081/anse",
+    "tipi_version": 4,
+    "port": 3000,
+    "categories": [
+        "ai"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "dynamic_config": true,
+    "form_fields": [
+        {
+            "type": "password",
+            "label": "OpenAI API Key",
+            "env_variable": "OPENAI_API_KEY",
+            "required": true
+        },
+        {
+            "type": "url",
+            "label": "OpenAI API Base URL",
+            "env_variable": "OPENAI_API_BASE_URL",
+            "placeholder": "https://api.openai.com"
+        },
+        {
+            "type": "text",
+            "label": "OpenAI Model ID",
+            "env_variable": "OPENAI_API_MODEL",
+            "placeholder": "gpt-4o-mini"
+        },
+        {
+            "type": "text",
+            "label": "Custom Head Scripts",
+            "env_variable": "HEAD_SCRIPTS",
+            "hint": "Injected into the <head> section of the page"
+        },
+        {
+            "type": "random",
+            "label": "Secret Key",
+            "env_variable": "SECRET_KEY",
+            "encoding": "hex"
+        },
+        {
+            "type": "password",
+            "label": "Site Password",
+            "env_variable": "SITE_PASSWORD",
+            "hint": "If set, the site will require a password to access"
+        }
+    ]
+}

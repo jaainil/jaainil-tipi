@@ -1,0 +1,19 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/main/packages/shared/src/schemas/dynamic-compose.schema.json",
+    "services": [
+        {
+            "name": "anse",
+            "image": "ddiu8081/anse:latest",
+            "isMain": true,
+            "internalPort": 3000,
+            "environment": {
+                "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+                "OPENAI_API_BASE_URL": "${OPENAI_API_BASE_URL}",
+                "OPENAI_API_MODEL": "${OPENAI_API_MODEL}",
+                "HEAD_SCRIPTS": "${HEAD_SCRIPTS}",
+                "SECRET_KEY": "${SECRET_KEY}",
+                "SITE_PASSWORD": "${SITE_PASSWORD}"
+            }
+        }
+    ]
+}
