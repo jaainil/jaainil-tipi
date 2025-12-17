@@ -1,0 +1,87 @@
+{
+    "id": "affine",
+    "available": true,
+    "deprecated": false,
+    "port": 3010,
+    "name": "AFFiNE",
+    "description": "Self-hosted AFFiNE workspace (docs, whiteboards, databases) with Redis + Postgres (pgvector).",
+    "version": "stable",
+    "tipi_version": 4,
+    "short_desc": "Open-source all-in-one workspace (Notion/Miro alternative).",
+    "author": "toeverything",
+    "source": "https://github.com/toeverything/AFFiNE",
+    "website": "https://affine.pro/",
+    "force_expose": false,
+    "generate_vapid_keys": false,
+    "categories": [
+        "data",
+        "utilities"
+    ],
+    "url_suffix": "",
+    "exposable": true,
+    "https": false,
+    "no_gui": false,
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "dynamic_config": true,
+    "min_tipi_version": "4.0.0",
+    "created_at": 0,
+    "updated_at": 0,
+    "force_pull": false,
+    "form_fields": [
+        {
+            "type": "text",
+            "label": "AFFiNE revision/tag",
+            "env_variable": "AFFINE_REVISION",
+            "required": true,
+            "default": "stable",
+            "hint": "Docker image tag for ghcr.io/toeverything/affine (e.g. stable, beta, canary)."
+        },
+        {
+            "type": "text",
+            "label": "Database name",
+            "env_variable": "DB_DATABASE",
+            "required": true,
+            "default": "affine"
+        },
+        {
+            "type": "text",
+            "label": "Database username",
+            "env_variable": "DB_USERNAME",
+            "required": true,
+            "default": "affine"
+        },
+        {
+            "type": "random",
+            "label": "Database password",
+            "env_variable": "DB_PASSWORD",
+            "required": true
+        },
+        {
+            "type": "boolean",
+            "label": "Enable HTTPS for generated links",
+            "env_variable": "AFFINE_SERVER_HTTPS",
+            "required": false,
+            "default": false,
+            "hint": "Sets AFFINE_SERVER_HTTPS=true/false."
+        },
+        {
+            "type": "fqdn",
+            "label": "Public hostname (optional)",
+            "env_variable": "AFFINE_SERVER_HOST",
+            "required": false,
+            "placeholder": "affine.example.com",
+            "hint": "Used for outbound links; leave blank if not needed."
+        },
+        {
+            "type": "url",
+            "label": "External URL (optional)",
+            "env_variable": "AFFINE_SERVER_EXTERNAL_URL",
+            "required": false,
+            "placeholder": "https://affine.example.com",
+            "hint": "Alternative to host/https flags; leave blank if not needed."
+        }
+    ]
+}
