@@ -1,0 +1,61 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "aptabase_pgdev",
+            "image": "postgres:15",
+            "environment": {
+                "POSTGRES_USER": "aptabase",
+                "POSTGRES_PASSWORD": "aptabase_pw",
+                "POSTGRES_DB": "aptabase"
+            },
+            "internalPort": 5432,
+            "volumes": [
+                {
+                    "hostPath": "pgdev-data",
+                    "containerPath": "/var/lib/postgresql/data",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ]
+        },
+        {
+            "name": "aptabase_clickhousedev",
+            "image": "clickhouse/clickhouse-server:23.8.4.69",
+            "environment": {
+                "CLICKHOUSE_USER": "aptabase",
+                "CLICKHOUSE_PASSWORD": "aptabase_pw"
+            },
+            "internalPort": 8123,
+            "volumes": [
+                {
+                    "hostPath": "clickhousedev-data",
+                    "containerPath": "/var/lib/clickhouse",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ],
+            "ulimits": {
+                "nofile": {
+                    "soft": 262144,
+                    "hard": 262144
+                }
+            }
+        },
+        {
+            "name": "aptabase_mailcatcher",
+            "image": "dockage/mailcatcher:0.8.2",
+            "internalPort": 1025,
+            "addPorts": [
+                {
+                    "containerPort": 1080,
+                    "hostPort": 1080,
+                    "tcp": true,
+                    "udp": false
+                }
+            ]
+        }
+    ]
+}

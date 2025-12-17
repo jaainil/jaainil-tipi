@@ -1,0 +1,26 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/cli/src/schemas/app-info.json",
+    "id": "aptabase-dev",
+    "available": true,
+    "name": "Aptabase Dev Stack",
+    "short_desc": "Development databases and mail catcher for Aptabase",
+    "description": "A development stack providing PostgreSQL, ClickHouse, and Mailcatcher for Aptabase local or self-hosted development.",
+    "author": "Aptabase",
+    "source": "https://github.com/aptabase/aptabase",
+    "website": "https://aptabase.com",
+    "tipi_version": 4,
+    "version": "latest",
+    "port": 5432,
+    "categories": [
+        "development",
+        "data"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "exposable": false,
+    "https": false,
+    "dynamic_config": true,
+    "force_pull": false
+}
