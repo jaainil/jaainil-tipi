@@ -1,0 +1,52 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "blinko",
+            "image": "blinkospace/blinko:latest",
+            "isMain": true,
+            "internalPort": 1111,
+            "environment": {
+                "NODE_ENV": "production",
+                "NEXT_PUBLIC_BASE_URL": "http://blinko:1111",
+                "DATABASE_URL": "postgresql://postgres:${POSTGRES_PASSWORD}@blinko-postgres:5432/postgres"
+            },
+            "healthCheck": {
+                "test": "CMD wget --spider http://localhost:1111/",
+                "interval": "30s",
+                "timeout": "10s",
+                "retries": 5,
+                "startPeriod": "30s"
+            },
+            "dependsOn": {
+                "blinko-postgres": {
+                    "condition": "service_healthy"
+                }
+            }
+        },
+        {
+            "name": "blinko-postgres",
+            "image": "postgres:14",
+            "environment": {
+                "POSTGRES_DB": "postgres",
+                "POSTGRES_USER": "postgres",
+                "POSTGRES_PASSWORD": "postgres"
+            },
+            "volumes": [
+                {
+                    "hostPath": "postgres-data",
+                    "containerPath": "/var/lib/postgresql/data",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ],
+            "healthCheck": {
+                "test": "CMD pg_isready -U postgres -d postgres",
+                "interval": "5s",
+                "timeout": "10s",
+                "retries": 5
+            }
+        }
+    ]
+}

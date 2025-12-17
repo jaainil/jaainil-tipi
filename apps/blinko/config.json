@@ -1,0 +1,43 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/cli/src/schemas/app-info.json",
+    "id": "blinko",
+    "available": true,
+    "name": "Blinko",
+    "short_desc": "Self-hosted knowledge base and note platform",
+    "description": "Blinko is a self-hosted platform for managing notes, knowledge, and personal content with authentication support.",
+    "author": "Blinko",
+    "source": "https://github.com/blinko-space/blinko",
+    "website": "https://github.com/blinko-space/blinko",
+    "tipi_version": 4,
+    "version": "latest",
+    "port": 1111,
+    "categories": [
+        "data",
+        "utilities"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "exposable": true,
+    "https": true,
+    "dynamic_config": true,
+    "form_fields": [
+        {
+            "type": "password",
+            "label": "NextAuth Secret",
+            "env_variable": "NEXTAUTH_SECRET"
+        },
+        {
+            "type": "password",
+            "label": "Postgres Password",
+            "env_variable": "POSTGRES_PASSWORD",
+            "default": "postgres"
+        },
+        {
+            "type": "url",
+            "label": "Public Base URL",
+            "env_variable": "NEXTAUTH_URL"
+        }
+    ]
+}
