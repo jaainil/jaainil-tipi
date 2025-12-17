@@ -1,0 +1,40 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "borgitory",
+            "image": "mlapaglia/borgitory:latest",
+            "isMain": true,
+            "internalPort": 8000,
+            "volumes": [
+                {
+                    "hostPath": "data",
+                    "containerPath": "/app/data",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                },
+                {
+                    "hostPath": "sources",
+                    "containerPath": "/sources",
+                    "readOnly": true,
+                    "shared": false,
+                    "private": false
+                },
+                {
+                    "hostPath": "repos",
+                    "containerPath": "/repos",
+                    "readOnly": true,
+                    "shared": false,
+                    "private": false
+                }
+            ],
+            "devices": [
+                "/dev/fuse"
+            ],
+            "capAdd": [
+                "SYS_ADMIN"
+            ]
+        }
+    ]
+}
