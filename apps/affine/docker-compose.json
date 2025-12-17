@@ -4,20 +4,11 @@
         {
             "name": "affine_server",
             "image": "ghcr.io/toeverything/affine:${AFFINE_REVISION:-stable}",
-            "environment": [
-                {
-                    "key": "REDIS_SERVER_HOST",
-                    "value": "redis"
-                },
-                {
-                    "key": "DATABASE_URL",
-                    "value": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}"
-                },
-                {
-                    "key": "AFFINE_INDEXER_ENABLED",
-                    "value": "false"
-                }
-            ],
+            "environment": {
+                "REDIS_SERVER_HOST": "redis",
+                "DATABASE_URL": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}",
+                "AFFINE_INDEXER_ENABLED": "false"
+            },
             "internalPort": 3010,
             "volumes": [
                 {
@@ -55,20 +46,11 @@
                 "-c",
                 "node ./scripts/self-host-predeploy.js"
             ],
-            "environment": [
-                {
-                    "key": "REDIS_SERVER_HOST",
-                    "value": "redis"
-                },
-                {
-                    "key": "DATABASE_URL",
-                    "value": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}"
-                },
-                {
-                    "key": "AFFINE_INDEXER_ENABLED",
-                    "value": "false"
-                }
-            ],
+            "environment": {
+                "REDIS_SERVER_HOST": "redis",
+                "DATABASE_URL": "postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}",
+                "AFFINE_INDEXER_ENABLED": "false"
+            },
             "volumes": [
                 {
                     "hostPath": "${UPLOAD_LOCATION}",
@@ -107,28 +89,13 @@
         {
             "name": "affine_postgres",
             "image": "pgvector/pgvector:pg16",
-            "environment": [
-                {
-                    "key": "POSTGRES_USER",
-                    "value": "${DB_USERNAME}"
-                },
-                {
-                    "key": "POSTGRES_PASSWORD",
-                    "value": "${DB_PASSWORD}"
-                },
-                {
-                    "key": "POSTGRES_DB",
-                    "value": "${DB_DATABASE:-affine}"
-                },
-                {
-                    "key": "POSTGRES_INITDB_ARGS",
-                    "value": "--data-checksums"
-                },
-                {
-                    "key": "POSTGRES_HOST_AUTH_METHOD",
-                    "value": "trust"
-                }
-            ],
+            "environment": {
+                "POSTGRES_USER": "${DB_USERNAME}",
+                "POSTGRES_PASSWORD": "${DB_PASSWORD}",
+                "POSTGRES_DB": "${DB_DATABASE:-affine}",
+                "POSTGRES_INITDB_ARGS": "--data-checksums",
+                "POSTGRES_HOST_AUTH_METHOD": "trust"
+            },
             "volumes": [
                 {
                     "hostPath": "${DB_DATA_LOCATION}",
