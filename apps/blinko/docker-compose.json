@@ -8,8 +8,10 @@
             "internalPort": 1111,
             "environment": {
                 "NODE_ENV": "production",
-                "NEXT_PUBLIC_BASE_URL": "http://blinko:1111",
-                "DATABASE_URL": "postgresql://postgres:${POSTGRES_PASSWORD}@blinko-postgres:5432/postgres"
+                "NEXTAUTH_URL": "http://localhost:1111",
+                "NEXT_PUBLIC_BASE_URL": "http://localhost:1111",
+                "NEXTAUTH_SECRET": "my_ultra_secure_nextauth_secret",
+                "DATABASE_URL": "postgresql://postgres:mysecretpassword@postgres:5435/postgres"
             },
             "healthCheck": {
                 "test": "CMD wget --spider http://localhost:1111/",
