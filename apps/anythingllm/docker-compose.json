@@ -1,0 +1,36 @@
+{
+    "schemaVersion": 2,
+    "services": [
+        {
+            "name": "0",
+            "image": "mintplexlabs/anythingllm:latest",
+            "environment": {
+                "UID": 1000,
+                "GID": 1000
+            },
+            "volumes": [
+                {
+                    "hostPath": "server-storage",
+                    "containerPath": "/app/server/storage",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                },
+                {
+                    "hostPath": "collector-hotdir",
+                    "containerPath": "/app/collector/hotdir",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                },
+                {
+                    "hostPath": "collector-outputs",
+                    "containerPath": "/app/collector/outputs",
+                    "readOnly": false,
+                    "shared": false,
+                    "private": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "$schema": "https://raw.githubusercontent.com/runtipi/runtipi/master/packages/cli/src/schemas/app-info.json",
+    "id": "anythingllm",
+    "available": true,
+    "name": "AnythingLLM",
+    "short_desc": "All-in-one AI document and chat workspace",
+    "description": "AnythingLLM is a full-stack AI workspace that allows you to chat with documents, connect to LLMs, and manage knowledge bases.",
+    "author": "Mintplex Labs",
+    "source": "https://github.com/Mintplex-Labs/anything-llm",
+    "website": "https://anythingllm.com",
+    "tipi_version": 4,
+    "version": "latest",
+    "port": 3001,
+    "categories": [
+        "ai",
+        "data"
+    ],
+    "supported_architectures": [
+        "amd64",
+        "arm64"
+    ],
+    "exposable": true,
+    "https": false,
+    "dynamic_config": true,
+    "form_fields": [
+        {
+            "type": "password",
+            "label": "OpenAI API Key",
+            "env_variable": "OPENAI_API_KEY"
+        },
+        {
+            "type": "text",
+            "label": "LLM Provider",
+            "env_variable": "LLM_PROVIDER",
+            "default": "openai"
+        },
+        {
+            "type": "number",
+            "label": "Container UID",
+            "env_variable": "UID",
+            "default": 1000
+        },
+        {
+            "type": "number",
+            "label": "Container GID",
+            "env_variable": "GID",
+            "default": 1000
+        }
+    ]
+}
